@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/features/hero/Hero';
 import { ProblemSection } from '@/features/problem/ProblemSection';
+import { ApproachSection } from '@/features/approach/ApproachSection';
+import { CtaStrip } from '@/features/approach/CtaStrip';
+import { ProgramSection } from '@/features/program/ProgramSection';
+import { StartSection } from '@/features/start/StartSection';
+import { FaqFooterSection } from '@/features/faq-footer/FaqFooterSection';
 
 export const metadata: Metadata = {
   title: 'Thrust · predictive scale-up for fermentation · Lemnisca',
@@ -21,6 +26,11 @@ export default function ThrustPage() {
     <>
       <Hero />
       <ProblemSection />
+      <ApproachSection />
+      <CtaStrip />
+      <ProgramSection />
+      <StartSection />
+      <FaqFooterSection />
       {/* Remaining sections to be built section-by-section */}
     </>
   );
