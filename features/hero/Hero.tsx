@@ -89,10 +89,10 @@ export function Hero() {
 
         {/* ── Content ── */}
         <div className="relative mx-auto flex min-h-[100svh] max-w-[1320px] flex-col justify-center px-6 pt-32 pb-12 md:min-h-0 md:px-10 md:pt-40 md:pb-40 md:justify-start lg:px-14">
-          <div className="-mt-5 grid grid-cols-1 gap-12 md:mt-0 md:grid-cols-12 md:gap-0">
+          <div className="-mt-5 grid grid-cols-1 items-end gap-12 md:mt-0 md:grid-cols-12 md:gap-0">
 
             {/* Left — headline + CTAs */}
-            <div className="md:col-span-7 md:-mt-10 md:pr-12">
+            <div className="md:col-span-6 md:pr-10">
               {/* <p
                 className="label-m text-teal-200 motion-settle"
                 style={{ animationDelay: '0ms' }}
@@ -153,9 +153,9 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Right — visual card cluster */}
-            <div className="flex items-center justify-center md:col-span-5 md:justify-start">
-              <div className="w-full max-w-[520px]">
+            {/* Right — visual */}
+            <div className="flex items-end justify-center md:col-span-6 md:justify-end">
+              <div className="w-full max-w-[760px]">
                 <HeroVisual />
               </div>
             </div>
