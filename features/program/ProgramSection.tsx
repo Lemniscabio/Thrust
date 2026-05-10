@@ -47,7 +47,14 @@ const STEPS = [
     ],
     output: 'Industrial-ready package',
   },
-] as const;
+] satisfies ReadonlyArray<{
+  n: string;
+  title: string;
+  sub: string;
+  bullets: readonly string[];
+  output: string;
+  core?: boolean;
+}>;
 
 const DELIVERABLES = [
   {
