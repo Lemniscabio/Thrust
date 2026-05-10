@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Teal ramp — brand primary #38AFD8 ── */
+  --color-teal-50:  #E2F3FE;
+  --color-teal-100: #80D4FA;
+  --color-teal-200: #38AFD8;
+  --color-teal-300: #2987A8;
+  --color-teal-500: #1B617A;
+  --color-teal-700: #0E3E4F;
+  --color-teal-900: #041E27;
+
+  /* ── Copper ramp — 10% accent #D86138 ── */
+  --color-copper-50:  #FCEDEB;
+  --color-copper-100: #F8C7BE;
+  --color-copper-200: #F3907A;
+  --color-copper-300: #D86138;
+  --color-copper-500: #A04627;
+  --color-copper-700: #6C2D17;
+  --color-copper-900: #3B1508;
+
+  /* ── Neutral ramp ── */
+  --color-neutral-50:  #F0F1F1;
+  --color-neutral-100: #C6CACC;
+  --color-neutral-200: #9FA3A6;
+  --color-neutral-300: #7B7E80;
+  --color-neutral-500: #585A5C;
+  --color-neutral-700: #37393A;
+  --color-neutral-900: #1A1B1C;
+
+  /* ── Surfaces ── */
+  --color-surface-white: #FFFFFF;
+  --color-surface-ice:   #E2F3FE;
+
+  /* ── Ink ── */
+  --color-ink-black:   #041E27;
+  --color-ink-graphite: #2987A8;
+  --color-ink-ash:     #7B7E80;
+
+  /* ── Font stacks (populated by next/font variables in layout) ── */
+  --font-sans:  var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono:  var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11", "cv02";
+    background: var(--color-teal-900);
+    color: var(--color-surface-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-teal-900);
+    color: var(--color-surface-white);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--color-teal-200);
+    color: var(--color-teal-900);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-copper-300);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ── Type scale ── */
+.display-hero {
+  font-size: clamp(2.75rem, 6.5vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  font-weight: 520;
+  font-variation-settings: "wght" 520;
+}
+
+.display-section {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+  font-weight: 520;
+  font-variation-settings: "wght" 520;
+}
+
+.display-sub {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  font-weight: 520;
+  font-variation-settings: "wght" 520;
+}
+
+.body-xl {
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+.body-l  { font-size: 1.25rem;   line-height: 1.5;  font-weight: 400; }
+.body-m  { font-size: 1rem;      line-height: 1.55; font-weight: 400; }
+.body-s  { font-size: 0.875rem;  line-height: 1.5;  letter-spacing: 0.003em; font-weight: 400; }
+
+.label-m {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.label-s {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  letter-spacing: 0.10em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.mono-m { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.45; }
+.mono-s { font-family: var(--font-mono); font-size: 0.75rem;  line-height: 1.4; }
+
+.accent-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.012em;
+  font-feature-settings: "calt" off;
+}
+
+/* ── Motion ── */
+@keyframes settle {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.motion-settle {
+  animation: settle 600ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes hairline-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.motion-hairline {
+  transform-origin: left;
+  animation: hairline-draw 700ms cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+@keyframes float-card {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-settle,
+  .motion-hairline {
+    animation: none !important;
+  }
+  .motion-settle   { opacity: 1; transform: none; }
+  .motion-hairline { transform: scaleX(1); }
+}
