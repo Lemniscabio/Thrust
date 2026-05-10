@@ -154,7 +154,8 @@ export function Hero() {
             </div>
 
             {/* Right — visual */}
-            <div className="flex items-end justify-center md:col-span-6 md:justify-end">
+            {/* <div className="flex items-end justify-center md:col-span-6 md:justify-end"> */}
+            <div className="flex items-end justify-center md:col-span-6 md:justify-end md:-translate-y-10">
               <div className="w-full max-w-[760px]">
                 <HeroVisual />
               </div>

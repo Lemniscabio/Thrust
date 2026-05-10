@@ -1,16 +1,21 @@
-// Hero visual — ascending zigzag path from pilot to industrial bioreactor.
-// Vessels use white strokes to contrast against the teal hero gradient.
+// Hero visual — predictive scale-up curve from pilot to industrial bioreactor.
+// Industrial tank is the dominant object; three liquid glass cards narrate the journey.
 
-// Shared stroke tokens
-const V  = 'rgba(255,255,255,0.72)';   // vessel primary stroke
-const V2 = 'rgba(255,255,255,0.35)';   // vessel secondary (bands, details)
-const V3 = 'rgba(255,255,255,0.18)';   // vessel tertiary (scaffolding diagonals)
-const VF = 'rgba(255,255,255,0.05)';   // vessel body fill
+// Pilot vessel tokens — supporting, dim
+const V  = 'rgba(255,255,255,0.62)';
+const V2 = 'rgba(255,255,255,0.30)';
+const VF = 'rgba(255,255,255,0.04)';
+
+// Industrial vessel tokens — bright cyan-white, hero element
+const IV  = 'rgba(225,250,255,0.98)';
+const IV2 = 'rgba(165,235,255,0.62)';
+const IV3 = 'rgba(110,210,240,0.26)';
+const IVF = 'rgba(56,175,216,0.10)';
 
 export function HeroVisual() {
   return (
     <svg
-      viewBox="40 30 450 400"
+      viewBox="20 0 550 410"
       fill="none"
       className="w-full select-none"
       style={{ height: 'auto', display: 'block' }}
@@ -19,24 +24,51 @@ export function HeroVisual() {
         <pattern id="hv-grid" width="36" height="36" patternUnits="userSpaceOnUse">
           <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(56,175,216,0.055)" strokeWidth="0.5"/>
         </pattern>
+
+        {/* Curve glow */}
         <filter id="hv-glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="7" result="blur"/>
+          <feGaussianBlur stdDeviation="9" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
+
+        {/* Dot glow */}
         <filter id="hv-dot-glow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="3" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
+
+        {/* Industrial cyan aura */}
+        <filter id="ind-aura" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="20" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+
+        {/* Glass card soft drop shadow */}
+        <filter id="card-shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="6" stdDeviation="11" floodColor="#020C14" floodOpacity="0.45"/>
+        </filter>
+
+        {/* Curve gradient: teal start → copper through end */}
         <linearGradient id="hv-path-grad" x1="0%" x2="100%" y1="0%" y2="0%">
-          <stop offset="0%"   stopColor="#38AFD8" stopOpacity="0.8"/>
-          <stop offset="28%"  stopColor="#D86138"/>
-          <stop offset="72%"  stopColor="#D86138" stopOpacity="0.95"/>
-          <stop offset="100%" stopColor="#38AFD8" stopOpacity="0.75"/>
+          <stop offset="0%"   stopColor="#38AFD8" stopOpacity="0.85"/>
+          <stop offset="22%"  stopColor="#D86138"/>
+          <stop offset="100%" stopColor="#D86138" stopOpacity="0.95"/>
         </linearGradient>
+
+        {/* Curve area fill */}
         <linearGradient id="hv-area-fill" x1="0%" x2="0%" y1="0%" y2="100%">
-          <stop offset="0%"   stopColor="#D86138" stopOpacity="0.1"/>
+          <stop offset="0%"   stopColor="#D86138" stopOpacity="0.10"/>
           <stop offset="100%" stopColor="#D86138" stopOpacity="0"/>
         </linearGradient>
+
+        {/* Dark radial backdrop behind tank */}
+        <radialGradient id="ind-backdrop" cx="50%" cy="42%" r="50%">
+          <stop offset="0%"   stopColor="#010A12" stopOpacity="0.92"/>
+          <stop offset="55%"  stopColor="#020E18" stopOpacity="0.62"/>
+          <stop offset="100%" stopColor="#020E18" stopOpacity="0"/>
+        </radialGradient>
+
+        {/* Ambient glows */}
         <radialGradient id="hv-teal-amb" cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stopColor="#38AFD8" stopOpacity="0.14"/>
           <stop offset="100%" stopColor="#38AFD8" stopOpacity="0"/>
@@ -45,219 +77,243 @@ export function HeroVisual() {
           <stop offset="0%"   stopColor="#D86138" stopOpacity="0.13"/>
           <stop offset="100%" stopColor="#D86138" stopOpacity="0"/>
         </radialGradient>
+
+        {/* Liquid glass card fills — frosted cyan-white */}
+        <linearGradient id="glass-fill" x1="0%" x2="0%" y1="0%" y2="100%">
+          <stop offset="0%"   stopColor="rgba(220,242,255,0.22)"/>
+          <stop offset="55%"  stopColor="rgba(180,220,250,0.10)"/>
+          <stop offset="100%" stopColor="rgba(160,210,240,0.06)"/>
+        </linearGradient>
+        <linearGradient id="glass-sheen" x1="0%" x2="0%" y1="0%" y2="100%">
+          <stop offset="0%"   stopColor="rgba(255,255,255,0.32)"/>
+          <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+        </linearGradient>
+
+        {/* Curve arrowhead */}
+        <marker id="curve-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+          markerWidth="9" markerHeight="9" orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M 0 0 L 10 5 L 0 10 L 2.5 5 z" fill="#D86138"/>
+        </marker>
       </defs>
 
-      {/* Grid */}
-      <rect width="540" height="430" fill="url(#hv-grid)" rx="24"/>
+      {/* ── Grid ── */}
+      <rect width="560" height="410" fill="url(#hv-grid)" rx="24"/>
 
-      {/* Ambient glows */}
-      <ellipse cx="70"  cy="330" rx="70"  ry="75"  fill="url(#hv-teal-amb)"/>
-      <ellipse cx="440" cy="145" rx="95"  ry="100" fill="url(#hv-teal-amb)"/>
-      <ellipse cx="255" cy="275" rx="210" ry="68"  fill="url(#hv-copper-amb)"/>
+      {/* ── Ambient glows ── */}
+      <ellipse cx="72"  cy="335" rx="74"  ry="78"  fill="url(#hv-teal-amb)"/>
+      <ellipse cx="445" cy="150" rx="120" ry="128" fill="url(#hv-teal-amb)"/>
+      <ellipse cx="240" cy="272" rx="220" ry="72"  fill="url(#hv-copper-amb)"/>
 
-      {/* Axes */}
-      <line x1="36" y1="375" x2="510" y2="375" stroke="rgba(56,175,216,0.18)" strokeWidth="0.8"/>
-      <line x1="36" y1="28"  x2="36"  y2="377" stroke="rgba(56,175,216,0.18)" strokeWidth="0.8"/>
-      <text x="515" y="378" fill="rgba(128,212,250,0.42)" fontSize="7" fontWeight="500" fontFamily="system-ui">Scale →</text>
-
-      {/* Trend line */}
-      <line x1="70" y1="310" x2="402" y2="195"
-        stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="4 7"/>
+      {/* ── Subtle axes (blueprint feel) ── */}
+      <line x1="38" y1="378" x2="540" y2="378" stroke="rgba(56,175,216,0.16)" strokeWidth="0.7"/>
+      <line x1="38" y1="30"  x2="38"  y2="380" stroke="rgba(56,175,216,0.16)" strokeWidth="0.7"/>
 
 
       {/* ═══════════════════════════════
-          PILOT BIOREACTOR  (bottom-left)
+          PILOT BIOREACTOR
       ═══════════════════════════════ */}
-      {/* Body */}
-      <rect x="50" y="310" width="40" height="45" rx="3"
-        fill={VF} stroke={V} strokeWidth="1.6"/>
-      {/* Top cap */}
-      <ellipse cx="70" cy="310" rx="20" ry="7"
-        fill="rgba(255,255,255,0.07)" stroke={V} strokeWidth="1.6"/>
-      {/* Bottom cap */}
-      <ellipse cx="70" cy="355" rx="20" ry="7"
-        fill="rgba(255,255,255,0.04)" stroke={V2} strokeWidth="1.2"/>
-      {/* Agitator */}
-      <line x1="70" y1="318" x2="70" y2="347"
-        stroke={V2} strokeWidth="0.9" strokeDasharray="3 4"/>
-      {/* Baffles */}
-      <line x1="52" y1="328" x2="88" y2="328" stroke={V2} strokeWidth="0.9"/>
-      <line x1="52" y1="338" x2="88" y2="338" stroke={V2} strokeWidth="0.9"/>
-      {/* Inlet pipe top */}
-      <line x1="70" y1="303" x2="70" y2="290"
-        stroke={V} strokeWidth="1.8" strokeLinecap="round"/>
-      {/* Outlet pipe */}
-      <line x1="90" y1="335" x2="102" y2="335"
-        stroke={V2} strokeWidth="1.4" strokeLinecap="round"/>
-      {/* Label */}
-      <text x="70" y="372" textAnchor="middle"
-        fill="rgba(255,255,255,0.85)" fontSize="7.5" fontWeight="700" letterSpacing="1.3" fontFamily="system-ui">
-        PILOT
-      </text>
-      <text x="70" y="382" textAnchor="middle"
-        fill="rgba(255,255,255,0.45)" fontSize="6.5" letterSpacing="0.4" fontFamily="system-ui">
-        10–500 L
-      </text>
+      <rect x="52" y="316" width="40" height="44" rx="3" fill={VF} stroke={V} strokeWidth="1.5"/>
+      <ellipse cx="72" cy="316" rx="20" ry="7" fill="rgba(255,255,255,0.07)" stroke={V} strokeWidth="1.5"/>
+      <ellipse cx="72" cy="360" rx="20" ry="7" fill="rgba(255,255,255,0.04)" stroke={V2} strokeWidth="1.1"/>
+      <line x1="72" y1="324" x2="72" y2="352" stroke={V2} strokeWidth="0.9" strokeDasharray="2 3"/>
+      <line x1="54" y1="336" x2="90" y2="336" stroke={V2} strokeWidth="0.8"/>
+      <line x1="72" y1="309" x2="72" y2="296" stroke={V} strokeWidth="1.7" strokeLinecap="round"/>
+      <line x1="92" y1="338" x2="104" y2="338" stroke={V2} strokeWidth="1.2" strokeLinecap="round"/>
+      <text x="72" y="376" textAnchor="middle" fill="rgba(255,255,255,0.7)" fontSize="7.5" fontWeight="700" letterSpacing="1.3" fontFamily="system-ui">PILOT</text>
+      <text x="72" y="386" textAnchor="middle" fill="rgba(255,255,255,0.36)" fontSize="6.5" letterSpacing="0.4" fontFamily="system-ui">10–500 L</text>
 
 
       {/* ═══════════════════════════════
-          INDUSTRIAL BIOREACTOR  (top-right)
+          INDUSTRIAL BIOREACTOR  (10% larger)
+          Body: x=380, y=72, w=130, h=156
       ═══════════════════════════════ */}
 
-      {/* Scaffolding LEFT */}
-      <line x1="370" y1="78" x2="370" y2="228" stroke={V2} strokeWidth="1"/>
-      <line x1="370" y1="100" x2="382" y2="100" stroke={V2} strokeWidth="0.9"/>
-      <line x1="370" y1="126" x2="382" y2="126" stroke={V2} strokeWidth="0.9"/>
-      <line x1="370" y1="152" x2="382" y2="152" stroke={V2} strokeWidth="0.9"/>
-      <line x1="370" y1="178" x2="382" y2="178" stroke={V2} strokeWidth="0.9"/>
-      <line x1="370" y1="100" x2="382" y2="126" stroke={V3} strokeWidth="0.7"/>
-      <line x1="370" y1="152" x2="382" y2="178" stroke={V3} strokeWidth="0.7"/>
+      {/* Dark radial backdrop */}
+      <ellipse cx="445" cy="150" rx="130" ry="148" fill="url(#ind-backdrop)"/>
+
+      {/* Cyan outer aura */}
+      <rect x="378" y="64" width="134" height="172" rx="11"
+        fill="none" stroke="rgba(56,175,216,0.55)" strokeWidth="8"
+        filter="url(#ind-aura)"/>
+
+      {/* Scaffolding LEFT — clean rungs only */}
+      <line x1="370" y1="76" x2="370" y2="244" stroke={IV3} strokeWidth="1"/>
+      <line x1="370" y1="105" x2="380" y2="105" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="370" y1="143" x2="380" y2="143" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="370" y1="181" x2="380" y2="181" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="370" y1="219" x2="380" y2="219" stroke={IV3} strokeWidth="0.9"/>
 
       {/* Scaffolding RIGHT */}
-      <line x1="502" y1="78" x2="502" y2="228" stroke={V2} strokeWidth="1"/>
-      <line x1="490" y1="100" x2="502" y2="100" stroke={V2} strokeWidth="0.9"/>
-      <line x1="490" y1="126" x2="502" y2="126" stroke={V2} strokeWidth="0.9"/>
-      <line x1="490" y1="152" x2="502" y2="152" stroke={V2} strokeWidth="0.9"/>
-      <line x1="490" y1="178" x2="502" y2="178" stroke={V2} strokeWidth="0.9"/>
-      <line x1="490" y1="100" x2="502" y2="126" stroke={V3} strokeWidth="0.7"/>
-      <line x1="490" y1="152" x2="502" y2="178" stroke={V3} strokeWidth="0.7"/>
+      <line x1="520" y1="76" x2="520" y2="244" stroke={IV3} strokeWidth="1"/>
+      <line x1="510" y1="105" x2="520" y2="105" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="510" y1="143" x2="520" y2="143" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="510" y1="181" x2="520" y2="181" stroke={IV3} strokeWidth="0.9"/>
+      <line x1="510" y1="219" x2="520" y2="219" stroke={IV3} strokeWidth="0.9"/>
 
-      {/* Main cylinder body */}
-      <rect x="382" y="78" width="108" height="132" rx="5"
-        fill={VF} stroke={V} strokeWidth="1.8"/>
+      {/* Main cylinder body — thicker, brighter stroke */}
+      <rect x="380" y="72" width="130" height="156" rx="6"
+        fill={IVF} stroke={IV} strokeWidth="2.8"/>
 
       {/* Construction bands */}
-      <line x1="384" y1="110" x2="488" y2="110" stroke={V2} strokeWidth="0.9"/>
-      <line x1="384" y1="140" x2="488" y2="140" stroke={V2} strokeWidth="0.9"/>
-      <line x1="384" y1="170" x2="488" y2="170" stroke={V2} strokeWidth="0.9"/>
+      <line x1="382" y1="111" x2="508" y2="111" stroke={IV2} strokeWidth="1"/>
+      <line x1="382" y1="150" x2="508" y2="150" stroke={IV2} strokeWidth="1"/>
+      <line x1="382" y1="189" x2="508" y2="189" stroke={IV2} strokeWidth="1"/>
 
-      {/* Flat top cap + collar flange */}
-      <ellipse cx="436" cy="78" rx="54" ry="15"
-        fill="rgba(255,255,255,0.07)" stroke={V} strokeWidth="1.8"/>
-      <ellipse cx="436" cy="78" rx="59" ry="18"
-        fill="none" stroke={V2} strokeWidth="1"/>
+      {/* Top cap + collar flange */}
+      <ellipse cx="445" cy="72" rx="65" ry="18" fill="rgba(180,245,255,0.08)" stroke={IV} strokeWidth="2.6"/>
+      <ellipse cx="445" cy="72" rx="71" ry="22" fill="none" stroke={IV2} strokeWidth="1.2"/>
 
-      {/* ── Nozzles — 4 distinct flanged stubs ──
-          Vessel top x=382–490 (center 436). Nozzle centres: 404, 424, 450, 470.
-          Each 18px wide, heights descend from tallest (center) to shorter (sides). ── */}
+      {/* Nozzle 1  cx=409 */}
+      <rect x="399" y="40" width="20" height="32" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="409" cy="40" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="409" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
 
-      {/* Nozzle 1  cx=404 */}
-      <rect x="395" y="48" width="18" height="28" rx="2"
-        fill={VF} stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="404" cy="48" rx="9" ry="5"
-        fill="rgba(255,255,255,0.1)" stroke={V} strokeWidth="1.4"/>
-      {/* base flange ring */}
-      <ellipse cx="404" cy="76" rx="11" ry="4"
-        fill="none" stroke={V2} strokeWidth="0.9"/>
+      {/* Nozzle 2  cx=431 */}
+      <rect x="421" y="26" width="20" height="46" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="431" cy="26" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="431" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
 
-      {/* Nozzle 2  cx=424 */}
-      <rect x="415" y="36" width="18" height="40" rx="2"
-        fill={VF} stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="424" cy="36" rx="9" ry="5"
-        fill="rgba(255,255,255,0.1)" stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="424" cy="76" rx="11" ry="4"
-        fill="none" stroke={V2} strokeWidth="0.9"/>
+      {/* Nozzle 3  cx=459  (tallest) */}
+      <rect x="449" y="16" width="20" height="56" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="459" cy="16" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="459" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
 
-      {/* Nozzle 3  cx=450  (tallest) */}
-      <rect x="441" y="28" width="18" height="48" rx="2"
-        fill={VF} stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="450" cy="28" rx="9" ry="5"
-        fill="rgba(255,255,255,0.1)" stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="450" cy="76" rx="11" ry="4"
-        fill="none" stroke={V2} strokeWidth="0.9"/>
-
-      {/* Nozzle 4  cx=470 */}
-      <rect x="461" y="44" width="18" height="32" rx="2"
-        fill={VF} stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="470" cy="44" rx="9" ry="5"
-        fill="rgba(255,255,255,0.1)" stroke={V} strokeWidth="1.4"/>
-      <ellipse cx="470" cy="76" rx="11" ry="4"
-        fill="none" stroke={V2} strokeWidth="0.9"/>
+      {/* Nozzle 4  cx=483 */}
+      <rect x="473" y="35" width="20" height="37" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="483" cy="35" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="483" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
 
       {/* Porthole */}
-      <circle cx="436" cy="148" r="16"
-        fill={VF} stroke={V} strokeWidth="1.6"/>
-      <circle cx="436" cy="148" r="11"
-        fill="none" stroke={V2} strokeWidth="1"/>
-      <circle cx="424" cy="137" r="2.2" fill={V}/>
-      <circle cx="448" cy="137" r="2.2" fill={V}/>
-      <circle cx="424" cy="159" r="2.2" fill={V}/>
-      <circle cx="448" cy="159" r="2.2" fill={V}/>
+      <circle cx="445" cy="150" r="19" fill={IVF} stroke={IV} strokeWidth="2.2"/>
+      <circle cx="445" cy="150" r="13" fill="none" stroke={IV2} strokeWidth="1.2"/>
+      <circle cx="431" cy="136" r="2.6" fill={IV}/>
+      <circle cx="459" cy="136" r="2.6" fill={IV}/>
+      <circle cx="431" cy="164" r="2.6" fill={IV}/>
+      <circle cx="459" cy="164" r="2.6" fill={IV}/>
 
       {/* Bottom cap */}
-      <ellipse cx="436" cy="210" rx="54" ry="15"
-        fill="rgba(255,255,255,0.05)" stroke={V2} strokeWidth="1.6"/>
+      <ellipse cx="445" cy="228" rx="65" ry="17" fill="rgba(56,175,216,0.05)" stroke={IV2} strokeWidth="1.9"/>
 
-      {/* Side valve pipe right */}
-      <line x1="490" y1="178" x2="506" y2="178"
-        stroke={V} strokeWidth="2" strokeLinecap="round"/>
-      <rect x="506" y="173" width="9" height="10" rx="2"
-        fill={VF} stroke={V2} strokeWidth="1"/>
+      {/* Side valve right */}
+      <line x1="510" y1="189" x2="528" y2="189" stroke={IV} strokeWidth="2.6" strokeLinecap="round"/>
+      <rect x="528" y="184" width="11" height="11" rx="2" fill={IVF} stroke={IV2} strokeWidth="1.1"/>
 
       {/* Outlet pipe left */}
-      <line x1="382" y1="192" x2="368" y2="192"
-        stroke={V2} strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="380" y1="207" x2="362" y2="207" stroke={IV2} strokeWidth="1.7" strokeLinecap="round"/>
 
       {/* Support legs */}
-      <line x1="396" y1="210" x2="388" y2="228" stroke={V2} strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="476" y1="210" x2="484" y2="228" stroke={V2} strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="388" y1="228" x2="484" y2="228" stroke={V2} strokeWidth="1"   strokeLinecap="round"/>
-      <line x1="396" y1="228" x2="420" y2="210" stroke={V3} strokeWidth="0.8"/>
-      <line x1="476" y1="228" x2="452" y2="210" stroke={V3} strokeWidth="0.8"/>
+      <line x1="398" y1="228" x2="388" y2="248" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="492" y1="228" x2="502" y2="248" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="388" y1="248" x2="502" y2="248" stroke={IV2} strokeWidth="1.2" strokeLinecap="round"/>
 
-      {/* Label */}
-      <text x="436" y="248" textAnchor="middle"
-        fill="rgba(255,255,255,0.88)" fontSize="7.5" fontWeight="700" letterSpacing="1.3" fontFamily="system-ui">
+      {/* Label — larger, brighter */}
+      <text x="445" y="270" textAnchor="middle"
+        fill="rgba(230,252,255,1)" fontSize="11.5" fontWeight="700" letterSpacing="2.2" fontFamily="system-ui">
         INDUSTRIAL
       </text>
-      <text x="436" y="258" textAnchor="middle"
-        fill="rgba(255,255,255,0.45)" fontSize="6.5" letterSpacing="0.4" fontFamily="system-ui">
+      <text x="445" y="285" textAnchor="middle"
+        fill="rgba(140,222,250,0.92)" fontSize="10" letterSpacing="0.7" fontFamily="system-ui">
         50k–500k L
       </text>
 
 
       {/* ═══════════════════════════════
-          ZIGZAG PATH
+          SCALE-UP CURVE — smooth bezier with arrowhead
       ═══════════════════════════════ */}
+
+      {/* Area fill below curve */}
       <path
-        d="M 70 310 L 106 326 L 148 299 L 183 320 L 224 280 L 258 303 L 300 260 L 333 284 L 372 242 L 402 195 L 402 375 L 70 375 Z"
+        d="M 72 316 C 180 295, 290 195, 380 178 L 380 378 L 72 378 Z"
         fill="url(#hv-area-fill)"
       />
+
+      {/* Soft orange glow halo */}
       <path
-        d="M 70 310 L 106 326 L 148 299 L 183 320 L 224 280 L 258 303 L 300 260 L 333 284 L 372 242 L 402 195"
+        d="M 72 316 C 180 295, 290 195, 380 178"
         stroke="#D86138"
-        strokeWidth="14"
+        strokeWidth="22"
         strokeOpacity="0.22"
         strokeLinecap="round"
-        strokeLinejoin="round"
+        fill="none"
         filter="url(#hv-glow)"
       />
+
+      {/* Main path with arrowhead leading into tank */}
       <path
-        d="M 70 310 L 106 326 L 148 299 L 183 320 L 224 280 L 258 303 L 300 260 L 333 284 L 372 242 L 402 195"
+        d="M 72 316 C 180 295, 290 195, 380 178"
         stroke="url(#hv-path-grad)"
-        strokeWidth="2.8"
+        strokeWidth="3.4"
         strokeLinecap="round"
-        strokeLinejoin="round"
+        fill="none"
+        markerEnd="url(#curve-arrow)"
       />
 
-      {/* Peak / valley dots */}
-      {([
-        [106, 326, true],
-        [148, 299, false],
-        [183, 320, true],
-        [224, 280, false],
-        [258, 303, true],
-        [300, 260, false],
-        [333, 284, true],
-        [372, 242, false],
-      ] as [number, number, boolean][]).map(([cx, cy, isValley]) => (
-        <circle key={cx} cx={cx} cy={cy} r="2.8"
-          fill={isValley ? 'rgba(56,175,216,0.85)' : '#D86138'}
-          filter="url(#hv-dot-glow)"
-        />
-      ))}
-      <circle cx="70"  cy="310" r="4" fill="#38AFD8" opacity="0.9" filter="url(#hv-dot-glow)"/>
-      <circle cx="402" cy="195" r="4" fill="#38AFD8" opacity="0.9" filter="url(#hv-dot-glow)"/>
+      {/* Waypoint dots — exactly 4 (mid two shifted to clear larger cards) */}
+      <circle cx="72"  cy="316" r="4.5" fill="#38AFD8" opacity="0.92" filter="url(#hv-dot-glow)"/>
+      <circle cx="205" cy="260" r="3.4" fill="#D86138" filter="url(#hv-dot-glow)"/>
+      <circle cx="294" cy="211" r="3.4" fill="#D86138" filter="url(#hv-dot-glow)"/>
+      <circle cx="380" cy="178" r="4.5" fill="#D86138" opacity="0.95" filter="url(#hv-dot-glow)"/>
+
+      {/* Waypoint labels — 4 readable captions */}
+      {/* <text x="72"  y="290" textAnchor="middle" fill="rgba(140,222,250,0.78)" fontSize="8" fontWeight="500" fontFamily="system-ui">Pilot data</text> */}
+      {/* <text x="205" y="250" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Model prediction</text> */}
+      {/* <text x="294" y="201" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Scale-up confidence</text> */}
+      <text x="445" y="103" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Industrial run</text>
+
+
+      {/* ═══════════════════════════════
+          LIQUID GLASS WAYPOINT CARDS
+          Frosted cyan-white · larger · readable
+      ═══════════════════════════════ */}
+
+      {/* ── Card 1: "Pilot evidence"  (near pilot vessel) ── */}
+      <g filter="url(#card-shadow)">
+        <rect x="20" y="214" width="174" height="76" rx="14"
+          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.45)" strokeWidth="0.9"/>
+        <rect x="21" y="215" width="172" height="28" rx="13"
+          fill="url(#glass-sheen)"/>
+        {/* Inner top highlight */}
+        <line x1="32" y1="215.5" x2="182" y2="215.5"
+          stroke="rgba(255,255,255,0.55)" strokeWidth="0.5" strokeLinecap="round"/>
+        {/* Indicator */}
+        <circle cx="42" cy="250" r="7" fill="rgba(56,175,216,0.22)"/>
+        <circle cx="42" cy="250" r="3.8" fill="#38AFD8"/>
+        {/* Title */}
+        <text x="58" y="246" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Pilot evidence</text>
+        {/* Sub */}
+        <text x="58" y="262" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Batch history ingested</text>
+        <text x="58" y="276" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Time-series · deviations · QA</text>
+      </g>
+
+      {/* ── Card 2: "Risk window"  (below center of curve) ── */}
+      <g filter="url(#card-shadow)">
+        <rect x="148" y="294" width="182" height="76" rx="14"
+          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.45)" strokeWidth="0.9"/>
+        <rect x="149" y="295" width="180" height="28" rx="13"
+          fill="url(#glass-sheen)"/>
+        <line x1="160" y1="295.5" x2="318" y2="295.5"
+          stroke="rgba(255,255,255,0.55)" strokeWidth="0.5" strokeLinecap="round"/>
+        <circle cx="168" cy="330" r="7" fill="rgba(216,97,56,0.25)"/>
+        <circle cx="168" cy="330" r="3.8" fill="#D86138"/>
+        <text x="184" y="326" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Risk window</text>
+        <text x="184" y="342" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Divergence drivers mapped</text>
+        <text x="184" y="356" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Where good and bad batches split</text>
+      </g>
+
+      {/* ── Card 3: "Scale-up package"  (above curve, near tank) ── */}
+      <g filter="url(#card-shadow)">
+        <rect x="176" y="96" width="192" height="78" rx="14"
+          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.50)" strokeWidth="0.9"/>
+        <rect x="177" y="97" width="190" height="29" rx="13"
+          fill="url(#glass-sheen)"/>
+        <line x1="188" y1="97.5" x2="356" y2="97.5"
+          stroke="rgba(255,255,255,0.6)" strokeWidth="0.5" strokeLinecap="round"/>
+        <circle cx="198" cy="133" r="7" fill="rgba(180,245,255,0.28)"/>
+        <circle cx="198" cy="133" r="3.8" fill="rgba(225,250,255,0.96)"/>
+        <text x="214" y="129" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Scale-up package</text>
+        <text x="214" y="145" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Model + envelope ready</text>
+        <text x="214" y="159" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Operating ranges · early warnings</text>
+      </g>
 
     </svg>
   );
