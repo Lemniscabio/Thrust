@@ -131,11 +131,6 @@ export function HeroVisual() {
       {/* Dark radial backdrop */}
       <ellipse cx="445" cy="150" rx="130" ry="148" fill="url(#ind-backdrop)"/>
 
-      {/* Cyan outer aura */}
-      <rect x="378" y="64" width="134" height="172" rx="11"
-        fill="none" stroke="rgba(56,175,216,0.55)" strokeWidth="8"
-        filter="url(#ind-aura)"/>
-
       {/* Scaffolding LEFT — clean rungs only */}
       <line x1="370" y1="76" x2="370" y2="244" stroke={IV3} strokeWidth="1"/>
       <line x1="370" y1="105" x2="380" y2="105" stroke={IV3} strokeWidth="0.9"/>
@@ -150,61 +145,72 @@ export function HeroVisual() {
       <line x1="510" y1="181" x2="520" y2="181" stroke={IV3} strokeWidth="0.9"/>
       <line x1="510" y1="219" x2="520" y2="219" stroke={IV3} strokeWidth="0.9"/>
 
-      {/* Main cylinder body — thicker, brighter stroke */}
-      <rect x="380" y="72" width="130" height="156" rx="6"
+      {/* Dome top (rounded shoulder) */}
+      <path d="M 380 88 Q 380 56 445 56 Q 510 56 510 88 Z"
+        fill={IVF} stroke={IV} strokeWidth="2.8" strokeLinejoin="round"/>
+      {/* Dome flange line */}
+      <line x1="380" y1="88" x2="510" y2="88" stroke={IV} strokeWidth="2.2"/>
+      {/* Manway hatch on dome */}
+      <ellipse cx="455" cy="68" rx="14" ry="4" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.6"/>
+      <ellipse cx="455" cy="68" rx="9" ry="2.4" fill="none" stroke={IV2} strokeWidth="1"/>
+
+      {/* Single tall vent stack — left of dome */}
+      <rect x="402" y="22" width="14" height="42" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
+      <ellipse cx="409" cy="22" rx="7.5" ry="3.4" fill="rgba(180,245,255,0.12)" stroke={IV} strokeWidth="1.85"/>
+      {/* Cap rim on stack */}
+      <line x1="400" y1="30" x2="418" y2="30" stroke={IV2} strokeWidth="1"/>
+      {/* Stack-to-dome elbow */}
+      <path d="M 409 64 Q 409 70 416 70 L 422 70" fill="none" stroke={IV2} strokeWidth="1.2" strokeLinecap="round"/>
+
+      {/* Main cylinder body */}
+      <rect x="380" y="88" width="130" height="132" rx="3"
         fill={IVF} stroke={IV} strokeWidth="2.8"/>
 
       {/* Construction bands */}
-      <line x1="382" y1="111" x2="508" y2="111" stroke={IV2} strokeWidth="1"/>
-      <line x1="382" y1="150" x2="508" y2="150" stroke={IV2} strokeWidth="1"/>
-      <line x1="382" y1="189" x2="508" y2="189" stroke={IV2} strokeWidth="1"/>
+      <line x1="382" y1="120" x2="508" y2="120" stroke={IV2} strokeWidth="1"/>
+      <line x1="382" y1="156" x2="508" y2="156" stroke={IV2} strokeWidth="1"/>
+      <line x1="382" y1="192" x2="508" y2="192" stroke={IV2} strokeWidth="1"/>
 
-      {/* Top cap + collar flange */}
-      <ellipse cx="445" cy="72" rx="65" ry="18" fill="rgba(180,245,255,0.08)" stroke={IV} strokeWidth="2.6"/>
-      <ellipse cx="445" cy="72" rx="71" ry="22" fill="none" stroke={IV2} strokeWidth="1.2"/>
+      {/* Porthole / sight glass */}
+      <circle cx="445" cy="156" r="17" fill={IVF} stroke={IV} strokeWidth="2.4"/>
+      <circle cx="445" cy="156" r="11" fill="none" stroke={IV2} strokeWidth="1.2"/>
+      <circle cx="433" cy="144" r="2" fill={IV}/>
+      <circle cx="457" cy="144" r="2" fill={IV}/>
+      <circle cx="433" cy="168" r="2" fill={IV}/>
+      <circle cx="457" cy="168" r="2" fill={IV}/>
 
-      {/* Nozzle 1  cx=409 */}
-      <rect x="399" y="40" width="20" height="32" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="409" cy="40" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="409" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
+      {/* Bottom cap shadow line */}
+      <ellipse cx="445" cy="220" rx="65" ry="6" fill="rgba(56,175,216,0.06)" stroke={IV2} strokeWidth="1.4"/>
 
-      {/* Nozzle 2  cx=431 */}
-      <rect x="421" y="26" width="20" height="46" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="431" cy="26" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="431" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
-
-      {/* Nozzle 3  cx=459  (tallest) */}
-      <rect x="449" y="16" width="20" height="56" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="459" cy="16" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="459" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
-
-      {/* Nozzle 4  cx=483 */}
-      <rect x="473" y="35" width="20" height="37" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="483" cy="35" rx="10" ry="5.5" fill="rgba(180,245,255,0.10)" stroke={IV} strokeWidth="1.85"/>
-      <ellipse cx="483" cy="70" rx="12" ry="4.5" fill="none" stroke={IV2} strokeWidth="1.05"/>
-
-      {/* Porthole */}
-      <circle cx="445" cy="150" r="19" fill={IVF} stroke={IV} strokeWidth="2.2"/>
-      <circle cx="445" cy="150" r="13" fill="none" stroke={IV2} strokeWidth="1.2"/>
-      <circle cx="431" cy="136" r="2.6" fill={IV}/>
-      <circle cx="459" cy="136" r="2.6" fill={IV}/>
-      <circle cx="431" cy="164" r="2.6" fill={IV}/>
-      <circle cx="459" cy="164" r="2.6" fill={IV}/>
-
-      {/* Bottom cap */}
-      <ellipse cx="445" cy="228" rx="65" ry="17" fill="rgba(56,175,216,0.05)" stroke={IV2} strokeWidth="1.9"/>
-
-      {/* Side valve right */}
-      <line x1="510" y1="189" x2="528" y2="189" stroke={IV} strokeWidth="2.6" strokeLinecap="round"/>
-      <rect x="528" y="184" width="11" height="11" rx="2" fill={IVF} stroke={IV2} strokeWidth="1.1"/>
+      {/* Side control panel — right side, offset clear of body */}
+      <line x1="510" y1="178" x2="538" y2="178" stroke={IV} strokeWidth="2" strokeLinecap="round"/>
+      <line x1="538" y1="178" x2="538" y2="190" stroke={IV} strokeWidth="2" strokeLinecap="round"/>
+      <rect x="528" y="190" width="22" height="30" rx="2.2" fill={IVF} stroke={IV} strokeWidth="1.6"/>
+      <line x1="532" y1="198" x2="546" y2="198" stroke={IV2} strokeWidth="0.8"/>
+      <line x1="532" y1="204" x2="546" y2="204" stroke={IV2} strokeWidth="0.8"/>
+      <circle cx="539" cy="214" r="1.8" fill={IV}/>
 
       {/* Outlet pipe left */}
-      <line x1="380" y1="207" x2="362" y2="207" stroke={IV2} strokeWidth="1.7" strokeLinecap="round"/>
+      <line x1="380" y1="204" x2="360" y2="204" stroke={IV2} strokeWidth="1.7" strokeLinecap="round"/>
+      <rect x="354" y="200" width="8" height="9" rx="1.2" fill={IVF} stroke={IV2} strokeWidth="1"/>
+
+      {/* Bottom skirt — small piping array */}
+      <line x1="410" y1="220" x2="410" y2="234" stroke={IV2} strokeWidth="1.4"/>
+      <line x1="425" y1="220" x2="425" y2="234" stroke={IV2} strokeWidth="1.4"/>
+      <line x1="440" y1="220" x2="440" y2="234" stroke={IV2} strokeWidth="1.4"/>
+      <line x1="455" y1="220" x2="455" y2="234" stroke={IV2} strokeWidth="1.4"/>
+      <line x1="400" y1="234" x2="465" y2="234" stroke={IV2} strokeWidth="1.3" strokeLinecap="round"/>
+
+      {/* Access stairs — left */}
+      <line x1="356" y1="214" x2="376" y2="214" stroke={IV2} strokeWidth="1.1"/>
+      <line x1="352" y1="226" x2="376" y2="226" stroke={IV2} strokeWidth="1.1"/>
+      <line x1="356" y1="214" x2="352" y2="226" stroke={IV2} strokeWidth="1"/>
+      <line x1="376" y1="214" x2="376" y2="226" stroke={IV2} strokeWidth="1"/>
 
       {/* Support legs */}
-      <line x1="398" y1="228" x2="388" y2="248" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="492" y1="228" x2="502" y2="248" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="388" y1="248" x2="502" y2="248" stroke={IV2} strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="395" y1="234" x2="385" y2="250" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="495" y1="234" x2="505" y2="250" stroke={IV2} strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="385" y1="250" x2="505" y2="250" stroke={IV2} strokeWidth="1.2" strokeLinecap="round"/>
 
       {/* Label — larger, brighter */}
       <text x="445" y="270" textAnchor="middle"
@@ -258,7 +264,6 @@ export function HeroVisual() {
       {/* <text x="72"  y="290" textAnchor="middle" fill="rgba(140,222,250,0.78)" fontSize="8" fontWeight="500" fontFamily="system-ui">Pilot data</text> */}
       {/* <text x="205" y="250" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Model prediction</text> */}
       {/* <text x="294" y="201" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Scale-up confidence</text> */}
-      <text x="445" y="103" textAnchor="middle" fill="rgba(255,200,140,0.85)" fontSize="8" fontWeight="500" fontFamily="system-ui">Industrial run</text>
 
 
       {/* ═══════════════════════════════
@@ -268,51 +273,38 @@ export function HeroVisual() {
 
       {/* ── Card 1: "Pilot evidence"  (near pilot vessel) ── */}
       <g filter="url(#card-shadow)">
-        <rect x="20" y="214" width="174" height="76" rx="14"
-          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.45)" strokeWidth="0.9"/>
-        <rect x="21" y="215" width="172" height="28" rx="13"
-          fill="url(#glass-sheen)"/>
-        {/* Inner top highlight */}
-        <line x1="32" y1="215.5" x2="182" y2="215.5"
-          stroke="rgba(255,255,255,0.55)" strokeWidth="0.5" strokeLinecap="round"/>
+        <rect x="14" y="206" width="214" height="92" rx="16"
+          fill="url(#glass-fill)" stroke="rgba(180,220,245,0.22)" strokeWidth="0.8"/>
         {/* Indicator */}
-        <circle cx="42" cy="250" r="7" fill="rgba(56,175,216,0.22)"/>
-        <circle cx="42" cy="250" r="3.8" fill="#38AFD8"/>
+        <circle cx="40" cy="248" r="8.5" fill="rgba(56,175,216,0.22)"/>
+        <circle cx="40" cy="248" r="4.6" fill="#38AFD8"/>
         {/* Title */}
-        <text x="58" y="246" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Pilot evidence</text>
+        <text x="60" y="244" fill="rgba(255,255,255,0.98)" fontSize="13.5" fontWeight="700" letterSpacing="-0.15" fontFamily="system-ui">Pilot evidence</text>
         {/* Sub */}
-        <text x="58" y="262" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Batch history ingested</text>
-        <text x="58" y="276" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Time-series · deviations · QA</text>
+        <text x="60" y="262" fill="rgba(220,240,255,0.82)" fontSize="10.5" fontFamily="system-ui">Batch history ingested</text>
+        <text x="60" y="278" fill="rgba(180,220,245,0.6)" fontSize="9" fontFamily="system-ui">Time-series · deviations · QA</text>
       </g>
 
       {/* ── Card 2: "Risk window"  (below center of curve) ── */}
       <g filter="url(#card-shadow)">
-        <rect x="148" y="294" width="182" height="76" rx="14"
-          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.45)" strokeWidth="0.9"/>
-        <rect x="149" y="295" width="180" height="28" rx="13"
-          fill="url(#glass-sheen)"/>
-        <line x1="160" y1="295.5" x2="318" y2="295.5"
-          stroke="rgba(255,255,255,0.55)" strokeWidth="0.5" strokeLinecap="round"/>
-        <circle cx="168" cy="330" r="7" fill="rgba(216,97,56,0.25)"/>
-        <circle cx="168" cy="330" r="3.8" fill="#D86138"/>
-        <text x="184" y="326" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Risk window</text>
-        <text x="184" y="342" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Divergence drivers mapped</text>
-        <text x="184" y="356" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Where good and bad batches split</text>
+        <rect x="156" y="302" width="226" height="92" rx="16"
+          fill="url(#glass-fill)" stroke="rgba(180,220,245,0.22)" strokeWidth="0.8"/>
+        <circle cx="180" cy="344" r="8.5" fill="rgba(216,97,56,0.25)"/>
+        <circle cx="180" cy="344" r="4.6" fill="#D86138"/>
+        <text x="200" y="340" fill="rgba(255,255,255,0.98)" fontSize="13.5" fontWeight="700" letterSpacing="-0.15" fontFamily="system-ui">Risk window</text>
+        <text x="200" y="358" fill="rgba(220,240,255,0.82)" fontSize="10.5" fontFamily="system-ui">Divergence drivers mapped</text>
+        <text x="200" y="374" fill="rgba(180,220,245,0.6)" fontSize="9" fontFamily="system-ui">Where good and bad batches split</text>
       </g>
 
       {/* ── Card 3: "Scale-up package"  (above curve, near tank) ── */}
       <g filter="url(#card-shadow)">
-        <rect x="176" y="96" width="192" height="78" rx="14"
-          fill="url(#glass-fill)" stroke="rgba(220,240,255,0.50)" strokeWidth="0.9"/>
-        <rect x="177" y="97" width="190" height="29" rx="13"
-          fill="url(#glass-sheen)"/>
-        <line x1="188" y1="97.5" x2="356" y2="97.5"
-          stroke="rgba(255,255,255,0.6)" strokeWidth="0.5" strokeLinecap="round"/>
-        <circle cx="198" cy="133" r="7" fill="rgba(180,245,255,0.28)"/>
-        <circle cx="198" cy="133" r="3.8" fill="rgba(225,250,255,0.96)"/>
-        <text x="214" y="129" fill="rgba(255,255,255,0.98)" fontSize="11" fontWeight="700" letterSpacing="-0.1" fontFamily="system-ui">Scale-up package</text>
-        <text x="214" y="145" fill="rgba(220,240,255,0.78)" fontSize="8.5" fontFamily="system-ui">Model + envelope ready</text>
-        <text x="214" y="159" fill="rgba(180,220,245,0.55)" fontSize="7.5" fontFamily="system-ui">Operating ranges · early warnings</text>
+        <rect x="150" y="84" width="234" height="96" rx="16"
+          fill="url(#glass-fill)" stroke="rgba(180,220,245,0.26)" strokeWidth="0.8"/>
+        <circle cx="174" cy="128" r="8.5" fill="rgba(180,245,255,0.28)"/>
+        <circle cx="174" cy="128" r="4.6" fill="rgba(225,250,255,0.96)"/>
+        <text x="194" y="124" fill="rgba(255,255,255,0.98)" fontSize="13.5" fontWeight="700" letterSpacing="-0.15" fontFamily="system-ui">Scale-up package</text>
+        <text x="194" y="142" fill="rgba(220,240,255,0.82)" fontSize="10.5" fontFamily="system-ui">Model + envelope ready</text>
+        <text x="194" y="158" fill="rgba(180,220,245,0.6)" fontSize="9" fontFamily="system-ui">Operating ranges · early warnings</text>
       </g>
 
     </svg>

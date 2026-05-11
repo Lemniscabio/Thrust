@@ -84,14 +84,7 @@ export function StartSection({ id = 'start' }: { id?: string }) {
                     backdropFilter: 'blur(10px)',
                   }}
                 >
-                  Free · Limited to 4 programs this quarter
-                </p>
-
-                <p
-                  className="mt-3 label-s"
-                  style={{ color: 'rgba(128,212,250,0.5)', letterSpacing: '0.07em' }}
-                >
-                  EXCLUSIVE 10-DAY THRUST PILOT
+                  Start with a 10 day Thrust pilot
                 </p>
 
                 <h2
@@ -121,26 +114,19 @@ export function StartSection({ id = 'start' }: { id?: string }) {
               </div>
 
               {/* ── Right — steps + CTA card ── */}
-              <div
-                className="relative rounded-[28px] border p-4 md:p-5"
-                style={{
-                  borderColor: 'rgba(255,255,255,0.1)',
-                  background: 'rgba(7,28,43,0.4)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04)',
-                }}
-              >
+              <div className="relative">
                 {/* Connector line left of right column */}
-                <div
+                {/* <div
                   aria-hidden
                   className="pointer-events-none absolute -left-5 top-10 hidden h-[calc(100%-80px)] w-px lg:block"
                   style={{
                     background:
                       'linear-gradient(180deg, rgba(56,175,216,0) 0%, rgba(56,175,216,0.3) 18%, rgba(56,175,216,0.55) 50%, rgba(56,175,216,0.3) 82%, rgba(56,175,216,0) 100%)',
                   }}
-                />
+                /> */}
 
                 {/* Steps */}
-                <div className="space-y-3">
+                {/* <div className="space-y-3">
                   {STEPS.map((step, index) => (
                     <div
                       key={step.title}
@@ -175,11 +161,11 @@ export function StartSection({ id = 'start' }: { id?: string }) {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
 
                 {/* CTA white card */}
                 <div
-                  className="mt-5 rounded-[30px] border px-6 py-7 md:px-7 md:py-8"
+                  className="rounded-[30px] border px-7 py-9 md:px-9 md:py-10"
                   style={{
                     borderColor: 'rgba(56,175,216,0.32)',
                     background:
@@ -190,15 +176,15 @@ export function StartSection({ id = 'start' }: { id?: string }) {
                   <h3
                     className="max-w-[20ch] font-medium leading-[1.08] tracking-[-0.038em]"
                     style={{
-                      fontSize: 'clamp(1.3rem,1.6vw,1.9rem)',
+                      fontSize: 'clamp(1.6rem,3.1vw,3.35rem)',
                       color: '#041E27',
                     }}
                   >
                     If your pilot works but industrial scale still feels uncertain, Thrust may be the next step.
                   </h3>
                   <p
-                    className="mt-4 max-w-[40ch] leading-[1.56] tracking-[-0.012em]"
-                    style={{ fontSize: '13px', color: '#50607D' }}
+                    className="mt-5 max-w-[44ch] leading-[1.6] tracking-[-0.012em]"
+                    style={{ fontSize: '15px', color: '#50607D' }}
                   >
                     We accept 4 free Thrust pilots per quarter so the senior technical team stays
                     directly involved in every program. If the program is a strong fit, we propose
@@ -209,7 +195,7 @@ export function StartSection({ id = 'start' }: { id?: string }) {
                   <div className="mt-6">
                     <Link
                       href="#"
-                      className="inline-flex items-center rounded-full px-5 py-3 text-[14px] font-medium tracking-[-0.015em] text-white transition-[background-color,box-shadow,transform] duration-150 ease-out hover:opacity-90 active:scale-[0.97]"
+                      className="inline-flex items-center rounded-full px-6 py-3.5 text-[15px] font-medium tracking-[-0.015em] text-white transition-[background-color,box-shadow,transform] duration-150 ease-out hover:opacity-90 active:scale-[0.97]"
                       style={{
                         background: '#D86138',
                         boxShadow: '0 18px 42px -26px rgba(216,97,56,0.54)',
@@ -221,8 +207,8 @@ export function StartSection({ id = 'start' }: { id?: string }) {
                   </div>
 
                   <p
-                    className="mt-6 max-w-[42ch] leading-[1.5] tracking-[-0.01em]"
-                    style={{ fontSize: '12px', color: '#607295' }}
+                    className="mt-7 max-w-[46ch] leading-[1.55] tracking-[-0.01em]"
+                    style={{ fontSize: '14px', color: '#607295' }}
                   >
                     We accept a limited number of Thrust programs each quarter so the senior
                     technical team can stay directly involved.
